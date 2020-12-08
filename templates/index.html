@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block body_block %}
+<link rel="stylesheet" href={% static "css/bird.css"%}>
+{% endblock %}
+
+{% block content %}
+
+<div class="display-3"> Welcome </div>
+<hr>
+
+{% if user.is_authenticated %}
+<div class="display-4"> Welcome back {{user.username}}!</div>
+{% else %}
+<div >
+<br>
+<br>
+<a class="btn btn-primary btn-lg" href="{% url 'accounts:login' %}">Login </a>&nbsp;&nbsp;
+<a class="btn btn-success btn-lg" href="{% url 'accounts:signup' %}">Signup </a>
+</div>
+{% endif %}
+
+{% endblock %}

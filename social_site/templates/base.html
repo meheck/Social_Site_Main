@@ -1,0 +1,91 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <title>Index Page</title>
+    <link rel="stylesheet" href={% static "css/base.css"%}>
+
+    {% block body_block %}
+    {% endblock %}
+    
+
+    <!--<script src="{% static "js/base.js"%}"> </script>-->
+
+     <!-- jQuery library -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet"> 
+
+    </head>
+    <body>
+
+   
+
+  <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{% url 'accounts:HomePage'%}" id="two">Socialize</a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    
+    {% if user.is_authenticated %}
+    <li><a href="{% url 'accounts:verifyprofile' username=request.user.username %}" style="color:white">Profile</a>
+    </li>&nbsp;&nbsp;&nbsp; 
+   <ul class="navbar-nav navbar-right">
+     <!-- <li class="nav-item active">-->
+       <!-- <a class="nav-link" href="{% url "posts:all" %}" id="one">
+          Posts
+          </a>-->
+      <!--</li>-->
+       <li>
+        <a href="{% url 'accounts:HomePage' %}" style="color:white">Home</a>
+        </li>&nbsp;&nbsp;&nbsp;
+      
+
+      <li class="dropdown"><a class="dropdown-toggle" id="link" data-toggle="dropdown" href="#">Post <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li id="post1"><a href="{% url 'posts:all' %}">All Posts</a></li>
+          <li id="post1"><a href="{% url 'posts:create' %}">New Post</a></li>
+        </ul>
+      </li>
+      
+       <!--<li class="nav-item active">
+        <a class="nav-link" href="{% url 'posts:create' %}" id="one">
+          New Post
+          </a>
+      </li>
+      </li>
+       <li><a href="{% url 'accounts:logout'%}" style="color:white">Logout</a>
+      </li>
+       <!-- <li class="nav-item active">
+        <a class="nav-link" href="{% url 'accounts:logout'%}" id="one">
+         Logout
+          </a>
+      </li>-->
+    </ul>
+      {% else %}
+     <ul class="navbar-nav navbar-right">
+       <li class="nav-item active">
+        <a class="nav-link" href="{% url 'accounts:login'%}" id="one">
+         Login
+          </a>
+      </li>
+        <li class="nav-item active">
+        <a class="nav-link" href="{% url 'accounts:signup'%}" id="one">
+         Sign up
+          </a>
+      </li>
+    </ul>
+    {% endif %}
+  </div>
+</nav>
