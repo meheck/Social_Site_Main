@@ -22,11 +22,11 @@ class Profile(models.Model):
     gender = models.CharField(max_length=2, choices=GENDER_OPTIONS)
     contact = models.CharField(max_length=10)
     profile_pic = models.ImageField(upload_to='images/',default='images/default.png',null=True,blank=True)
-    #followers = models.ManyToManyField("self",symmetrical=False,related_name="following")
+    followers = models.ManyToManyField("self",symmetrical=False,related_name="following")
     def __str__(self):
        return self.user.username
     
-    followers = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,related_name="followers")
+    #followers = models.ManyToManyField(self, blank=True,related_name="followers")
 
     def get_follow_instances(self):
         return self.followers.all()

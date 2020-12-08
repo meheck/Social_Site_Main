@@ -65,6 +65,8 @@ class FollowToggle(RedirectView):
             return "/login"
 
 def search(request):
+    #model=Profile
+    #template_name= 'search/search_profiles.html'
     if (request.user.is_authenticated):
         query = request.GET.get("search")
         user_ = get_object_or_404(Profile, user=request.user)
@@ -84,6 +86,6 @@ def search(request):
             'all_users': Profile.objects.all(),
         }
 
-        return render(request, "search_profiles.html", context)
+        return render(request, "search/search_profiles.html", context)
     else:
         return redirect("login")
