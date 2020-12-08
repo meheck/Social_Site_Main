@@ -10,15 +10,14 @@ from posts.models import Post,Comment
 from django.forms import forms
 from django.contrib.auth import get_user_model
 
-"""returns the active User model"""
+
 User=get_user_model()
 
 
-"""This view is used to get the list of all the posts""" 
 class PostList(SelectRelatedMixin,ListView):
     model=Post
 
-    """used to effectively extract values of Foreign Key fields"""
+ 
     select_related=('user',)
 
     def get_queryset(self):
@@ -26,7 +25,7 @@ class PostList(SelectRelatedMixin,ListView):
         return queryset
 
 
-"""This view is used to get user specific posts"""
+
 class UserPosts(SelectRelatedMixin,ListView):
     model=Post
     template_name='posts/user_post_list.html'
@@ -45,7 +44,7 @@ class UserPosts(SelectRelatedMixin,ListView):
         return context
 
 
-"""This view is used to get the complete details of a post"""
+
 class PostDetail(SelectRelatedMixin,DetailView):
     model=Post
     select_related=('user',)
@@ -61,7 +60,7 @@ class PostDetail(SelectRelatedMixin,DetailView):
         return context
                                                   
 
-"""This view is used for creation of a new post"""
+
 class CreatePost(LoginRequiredMixin,SelectRelatedMixin,CreateView):
     model=Post
     fields=('message',)
@@ -73,13 +72,13 @@ class CreatePost(LoginRequiredMixin,SelectRelatedMixin,CreateView):
         return super().form_valid(form)
 
 
-"""This view is used for updating or editing an existing post"""
+
 class UpdatePost(LoginRequiredMixin,UpdateView):
     model=Post
     fields=('message',)
 
 
-"""This view is used for the deletion of a post"""
+
 class DeletePost(LoginRequiredMixin,SelectRelatedMixin,DeleteView):
     model=Post
     success_url=reverse_lazy('posts:all')
@@ -94,7 +93,7 @@ class DeletePost(LoginRequiredMixin,SelectRelatedMixin,DeleteView):
         return super().delete(*args,**kwargs)
 
 
-"""This view is used for comment addition"""
+
 class AddComment(LoginRequiredMixin,CreateView):
     model=Comment
     fields=('text',)
@@ -114,7 +113,7 @@ class AddComment(LoginRequiredMixin,CreateView):
         return reverse_lazy('posts:single',kwargs={'username':username,'pk':pk})
 
 
-"""This view is for updating elements"""
+
 class DeleteComment(LoginRequiredMixin,DeleteView):
     model=Comment
     
